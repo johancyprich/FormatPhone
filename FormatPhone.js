@@ -1,6 +1,6 @@
 /// APPLICATION: FormatPhone
-/// VERSION: 1.0.0
-/// DATE: December 18, 2014
+/// VERSION: 1.1.0
+/// DATE: February 27, 2015
 /// AUTHOR: Johan Cyprich
 /// AUTHOR URL: www.cyprich.com
 /// AUTHOR EMAIL: jcyprich@live.com
@@ -8,7 +8,7 @@
 /// LICENSE:
 /// The MIT License (MIT)
 ///
-/// Copyright (c) 2014 Johan Cyprich. All rights reserved.
+/// Copyright (c) 2014-2015 Johan Cyprich. All rights reserved.
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy 
 /// of this software and associated documentation files (the "Software"), to deal
@@ -46,6 +46,8 @@
 ///              6   (###) ### ####
 ///              7   +??#-###-###-####
 ///              8   +??# (###) ###-####
+///              9   +??# (###) ### ####
+///              10  +??# ### ### ####
 ///
 ///              where # is a number
 ///                    ? is an optional number
@@ -86,7 +88,7 @@ function FormatPhone (tel, style)
   
   len = parsedTel.length;
   
-  if ((style == 7) || (style == 8))                            // tel with country code will have 11 to 13 digits
+  if ((style == 7) || (style == 8) || (style == 9))            // tel with country code will have 11 to 13 digits
     error = ((len < 11) || (len > 13)) ? 1 : 0;
   
   else                                                         // phone number must have 10 digits
@@ -143,6 +145,18 @@ function FormatPhone (tel, style)
       result = "+" + parsedTel.substr (0, telPos) + " (" + parsedTel.substr (telPos, 3) + ") " + parsedTel.substr (telPos + 3, 3) + "-" + parsedTel.substr (telPos + 6, 4);
       break;
       
+    // +??# (###) ### ####
+    case 9 :
+      telPos = len - 10;
+      result = "+" + parsedTel.substr (0, telPos) + " (" + parsedTel.substr (telPos, 3) + ") " + parsedTel.substr (telPos + 3, 3) + " " + parsedTel.substr (telPos + 6, 4);
+      break;
+
+    // +??# ### ### ####
+    case 10 :
+      telPos = len - 10;
+      result = "+" + parsedTel.substr (0, telPos) + " " + parsedTel.substr (telPos, 3) + " " + parsedTel.substr (telPos + 3, 3) + " " + parsedTel.substr (telPos + 6, 4);
+      break;
+	  
     // Don't parse the tel string. Just return it.      
     default :
       result = tel;
