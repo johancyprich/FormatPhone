@@ -1,4 +1,4 @@
-*FormatPhone*
+<h1>FormatPhone</h1>
 
 Version: 1.1.0<br />
 February 27, 2015<br />
