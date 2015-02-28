@@ -88,7 +88,7 @@ function FormatPhone (tel, style)
   
   len = parsedTel.length;
   
-  if ((style == 7) || (style == 8) || (style == 9))            // tel with country code will have 11 to 13 digits
+  if ((style >= 7) || (style <= 10))            // tel with country code will have 11 to 13 digits
     error = ((len < 11) || (len > 13)) ? 1 : 0;
   
   else                                                         // phone number must have 10 digits
