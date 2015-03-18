@@ -1,6 +1,6 @@
 /// APPLICATION: FormatPhone
-/// VERSION: 1.1.0
-/// DATE: February 27, 2015
+/// VERSION: 1.2.0
+/// DATE: March 18, 2015
 /// AUTHOR: Johan Cyprich
 /// AUTHOR URL: www.cyprich.com
 /// AUTHOR EMAIL: jcyprich@live.com
@@ -48,6 +48,7 @@
 ///              8   +??# (###) ###-####
 ///              9   +??# (###) ### ####
 ///              10  +??# ### ### ####
+///              11  +??#.###.###.####
 ///
 ///              where # is a number
 ///                    ? is an optional number
@@ -88,7 +89,7 @@ function FormatPhone (tel, style)
   
   len = parsedTel.length;
   
-  if ((style >= 7) || (style <= 10))            // tel with country code will have 11 to 13 digits
+  if ((style >= 7) || (style <= 11))                           // tel with country code will have 11 to 13 digits
     error = ((len < 11) || (len > 13)) ? 1 : 0;
   
   else                                                         // phone number must have 10 digits
@@ -155,6 +156,12 @@ function FormatPhone (tel, style)
     case 10 :
       telPos = len - 10;
       result = "+" + parsedTel.substr (0, telPos) + " " + parsedTel.substr (telPos, 3) + " " + parsedTel.substr (telPos + 3, 3) + " " + parsedTel.substr (telPos + 6, 4);
+      break;
+	  
+    // +??#.###.###.####
+    case 11 :
+      telPos = len - 10;
+      result = "+" + parsedTel.substr (0, telPos) + "." + parsedTel.substr (telPos, 3) + "." + parsedTel.substr (telPos + 3, 3) + "." + parsedTel.substr (telPos + 6, 4);
       break;
 	  
     // Don't parse the tel string. Just return it.      
