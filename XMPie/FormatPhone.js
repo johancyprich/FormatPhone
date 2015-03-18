@@ -27,7 +27,7 @@
   
   len = parsedTel.length;
   
-  if ((style >= 7) || (style <= 10))            // tel with country code will have 11 to 13 digits
+  if ((style >= 7) || (style <= 11))                           // tel with country code will have 11 to 13 digits
     error = ((len < 11) || (len > 13)) ? 1 : 0;
   
   else                                                         // phone number must have 10 digits
@@ -94,6 +94,12 @@
     case 10 :
       telPos = len - 10;
       result = "+" + parsedTel.substr (0, telPos) + " " + parsedTel.substr (telPos, 3) + " " + parsedTel.substr (telPos + 3, 3) + " " + parsedTel.substr (telPos + 6, 4);
+      break;
+	  
+    // +??#.###.###.####
+    case 11 :
+      telPos = len - 10;
+      result = "+" + parsedTel.substr (0, telPos) + "." + parsedTel.substr (telPos, 3) + "." + parsedTel.substr (telPos + 3, 3) + "." + parsedTel.substr (telPos + 6, 4);
       break;
 	  
     // Don't parse the tel string. Just return it.      
