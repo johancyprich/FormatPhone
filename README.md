@@ -1,4 +1,5 @@
-*FormatPhone*
+FormatPhone
+---
 
 Version: 1.2.0<br />
 March 18, 2015<br />
