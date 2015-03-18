@@ -1,7 +1,7 @@
-<h1>FormatPhone</h1>
+*FormatPhone*
 
-Version: 1.1.0<br />
-February 27, 2015<br />
+Version: 1.2.0<br />
+March 18, 2015<br />
 License: The MIT License (MIT)<br />
 Author: Johan Cyprich (jcyprich@live.com)<br />
 
@@ -26,6 +26,7 @@ style (in) - the format to write the phone number as. The options for style are 
 8	+??# (###) ###-####<br />
 9	+??# (###) ### ####<br />
 10	+??# ### ### ####
+11  +??#.###.###.####
 
   where # is a number<br />
         ? is an optional number
