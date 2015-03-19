@@ -27,12 +27,25 @@
   
   len = parsedTel.length;
   
-  if ((style >= 7) || (style <= 11))                           // tel with country code will have 11 to 13 digits
-    error = ((len < 11) || (len > 13)) ? 1 : 0;
+  switch (style)
+  {
+    // International phone numbers.
+	
+    case 7:
+	case 8:
+	case 9:
+	case 10:
+	case 11:
+	  error = ((len < 11) || (len > 13)) ? 1 : 0;
+	  break;
+	  
+	// Canada and US 10 digit phone numbers.
+	
+	default:
+	  error = (len != max) ? 1 : 0;
+	  break;
+  }
   
-  else                                                         // phone number must have 10 digits
-    error = (len != max) ? 1 : 0;
-    
   // Format tel according to style.
 
   switch (style)
@@ -83,7 +96,7 @@
       telPos = len - 10;
       result = "+" + parsedTel.substr (0, telPos) + " (" + parsedTel.substr (telPos, 3) + ") " + parsedTel.substr (telPos + 3, 3) + "-" + parsedTel.substr (telPos + 6, 4);
       break;
-      
+
     // +??# (###) ### ####
     case 9 :
       telPos = len - 10;
@@ -101,7 +114,7 @@
       telPos = len - 10;
       result = "+" + parsedTel.substr (0, telPos) + "." + parsedTel.substr (telPos, 3) + "." + parsedTel.substr (telPos + 3, 3) + "." + parsedTel.substr (telPos + 6, 4);
       break;
-	  
+      
     // Don't parse the tel string. Just return it.      
     default :
       result = tel;
