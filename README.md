@@ -26,8 +26,8 @@ style (in) - the format to write the phone number as. The options for style are 
 7	+??#-###-###-####<br />
 8	+??# (###) ###-####<br />
 9	+??# (###) ### ####<br />
-10	+??# ### ### ####
-11  +??#.###.###.####
+10	+??# ### ### ####<br />
+11	+??#.###.###.####
 
   where # is a number<br />
         ? is an optional number
