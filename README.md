@@ -1,8 +1,8 @@
 FormatPhone
 ---
 
-Version: 1.2.0<br />
-March 18, 2015<br />
+Version: 1.1.0<br />
+March 19, 2015<br />
 License: The MIT License (MIT)<br />
 Author: Johan Cyprich (jcyprich@live.com)<br />
 
