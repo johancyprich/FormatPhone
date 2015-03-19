@@ -1,62 +1,59 @@
-/// APPLICATION: FormatPhone
-/// VERSION: 1.2.0
-/// DATE: March 18, 2015
-/// AUTHOR: Johan Cyprich
-/// AUTHOR URL: www.cyprich.com
-/// AUTHOR EMAIL: jcyprich@live.com
-/// 
-/// LICENSE:
-/// The MIT License (MIT)
-///
-/// Copyright (c) 2014-2015 Johan Cyprich. All rights reserved.
-///
-/// Permission is hereby granted, free of charge, to any person obtaining a copy 
-/// of this software and associated documentation files (the "Software"), to deal
-/// in the Software without restriction, including without limitation the rights
-/// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-/// copies of the Software, and to permit persons to whom the Software is
-/// furnished to do so, subject to the following conditions:
-///
-/// The above copyright notice and this permission notice shall be included in
-/// all copies or substantial portions of the Software.
-///
-/// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-/// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-/// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-/// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-/// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-/// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-/// THE SOFTWARE.
-///
-/// SUMMARY:
-/// JavaScript function that formats a phone number according a user selected style. The function
-/// extracts all of the numbers from the tel string and tries to build a phone number. If the
-/// number of digits extracted is not 10, then the function will return an error.
-///
-/// PARAMETERS:
-/// tel (in) - phone number to be formatted
-/// style (in) - the format to write the phone number as. The options for style are the following:
-///
-///              0   No formatting
-///              1   ###-###-####
-///              2   ###.###.####
-///              3   ### ### ####
-///              4   (###) ###-####
-///              5   (###) ###.####
-///              6   (###) ### ####
-///              7   +??#-###-###-####
-///              8   +??# (###) ###-####
-///              9   +??# (###) ### ####
-///              10  +??# ### ### ####
-///              11  +??#.###.###.####
-///
-///              where # is a number
-///                    ? is an optional number
-///
-/// RETURN:
-/// If a valid phone number was created, it will be returned as a string. Otherwise,
-/// the string returned will be NaN is phone number could not be parsed. If an empty string is
-/// being parsed, the function will exit and return the empty string instead of NaN.
+// APPLICATION: FormatPhone
+// VERSION: 1.1.0
+// DATE: March 19, 2015
+// AUTHOR: Johan Cyprich
+// AUTHOR URL: www.cyprich.com
+// AUTHOR EMAIL: jcyprich@live.com
+// 
+// LICENSE:
+// The MIT License (MIT)
+//
+// Copyright (c) 2014-2015 Johan Cyprich. All rights reserved.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy 
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+//
+// SUMMARY:
+// JavaScript function that formats a phone number according a user selected style. The function
+// extracts all of the numbers from the tel string and tries to build a phone number. If the
+// number of digits extracted is not 10, then the function will return an error.
+//
+// PARAMETERS:
+// tel (in) - phone number to be formatted
+// style (in) - the format to write the phone number as. The options for style are the following:
+//
+//              0   No formatting
+//              1   ###-###-####
+//              2   ###.###.####
+//              3   ### ### ####
+//              4   (###) ###-####
+//              5   (###) ###.####
+//              6   (###) ### ####
+//              7   +??#-###-###-####
+//              8   +??# (###) ###-####
+//
+//              where # is a number
+//                    ? is an optional number
+//
+// RETURN:
+// If a valid phone number was created, it will be returned as a string. Otherwise,
+// the string returned will be NaN is phone number could not be parsed. If an empty string is
+// being parsed, the function will exit and return the empty string instead of NaN.
 
 function FormatPhone (tel, style)
 {
@@ -89,12 +86,25 @@ function FormatPhone (tel, style)
   
   len = parsedTel.length;
   
-  if ((style >= 7) || (style <= 11))                           // tel with country code will have 11 to 13 digits
-    error = ((len < 11) || (len > 13)) ? 1 : 0;
+  switch (style)
+  {
+    // International phone numbers.
+	
+    case 7:
+	case 8:
+	case 9:
+	case 10:
+	case 11:
+	  error = ((len < 11) || (len > 13)) ? 1 : 0;
+	  break;
+	  
+	// Canada and US 10 digit phone numbers.
+	
+	default:
+	  error = (len != max) ? 1 : 0;
+	  break;
+  }
   
-  else                                                         // phone number must have 10 digits
-    error = (len != max) ? 1 : 0;
-    
   // Format tel according to style.
 
   switch (style)
@@ -145,7 +155,7 @@ function FormatPhone (tel, style)
       telPos = len - 10;
       result = "+" + parsedTel.substr (0, telPos) + " (" + parsedTel.substr (telPos, 3) + ") " + parsedTel.substr (telPos + 3, 3) + "-" + parsedTel.substr (telPos + 6, 4);
       break;
-      
+
     // +??# (###) ### ####
     case 9 :
       telPos = len - 10;
@@ -163,7 +173,7 @@ function FormatPhone (tel, style)
       telPos = len - 10;
       result = "+" + parsedTel.substr (0, telPos) + "." + parsedTel.substr (telPos, 3) + "." + parsedTel.substr (telPos + 3, 3) + "." + parsedTel.substr (telPos + 6, 4);
       break;
-	  
+      
     // Don't parse the tel string. Just return it.      
     default :
       result = tel;
