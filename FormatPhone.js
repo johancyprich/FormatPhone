@@ -1,6 +1,6 @@
 // APPLICATION: FormatPhone
-// VERSION: 1.1.0
-// DATE: March 19, 2015
+// VERSION: 1.2.0
+// DATE: May 12, 2015
 // AUTHOR: Johan Cyprich
 // AUTHOR URL: www.cyprich.com
 // AUTHOR EMAIL: jcyprich@live.com
@@ -46,6 +46,10 @@
 //              6   (###) ### ####
 //              7   +??#-###-###-####
 //              8   +??# (###) ###-####
+//              9   +??# (###) ### ####
+//              10  +??# ### ### ####
+//              11  +??#.###.###.####
+//              12  # ### ###-####
 //
 //              where # is a number
 //                    ? is an optional number
@@ -91,12 +95,13 @@ function FormatPhone (tel, style)
     // International phone numbers.
 	
     case 7:
-	case 8:
-	case 9:
-	case 10:
-	case 11:
-	  error = ((len < 11) || (len > 13)) ? 1 : 0;
-	  break;
+	  case 8:
+  	case 9:
+	  case 10:
+    case 11:
+    case 12:
+  	  error = ((len < 11) || (len > 13)) ? 1 : 0;
+	    break;
 	  
 	// Canada and US 10 digit phone numbers.
 	
@@ -172,6 +177,12 @@ function FormatPhone (tel, style)
     case 11 :
       telPos = len - 10;
       result = "+" + parsedTel.substr (0, telPos) + "." + parsedTel.substr (telPos, 3) + "." + parsedTel.substr (telPos + 3, 3) + "." + parsedTel.substr (telPos + 6, 4);
+      break;
+
+    // # ### ###-####
+    case 12:
+      telPos = len - 10;
+      result = parsedTel.substr(0, telPos) + " " + parsedTel.substr(telPos, 3) + " " + parsedTel.substr(telPos + 3, 3) + "-" + parsedTel.substr(telPos + 6, 4);
       break;
       
     // Don't parse the tel string. Just return it.      
