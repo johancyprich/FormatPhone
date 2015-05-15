@@ -1,7 +1,7 @@
 <h1>FormatPhone</h1>
 
 Version: 1.2.0<br />
-May 12, 2015<br />
+May 15, 2015<br />
 License: The MIT License (MIT)<br />
 Author: Johan Cyprich (jcyprich@live.com)<br />
 
@@ -82,8 +82,7 @@ number of digits extracted is not 10, then the function will return an error.</p
 
 <h2>Return Value:</h2>
 <p>If a valid phone number was created, it will be returned as a string. Otherwise,
-the string returned will be NaN is phone number could not be parsed. If an empty string is
-being parsed, the function will exit and return the empty string instead of NaN.</p>
+the string returned will be "*** ERROR ***" if the phone number could not be parsed. If an empty string is being parsed, the function will exit and return the empty string instead of the error message.</p>
 
 
 <h2>How to Install Script in uPlan</h2>
