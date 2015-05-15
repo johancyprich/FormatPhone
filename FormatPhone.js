@@ -1,6 +1,6 @@
 // APPLICATION: FormatPhone
 // VERSION: 1.2.0
-// DATE: May 12, 2015
+// DATE: May 15, 2015
 // AUTHOR: Johan Cyprich
 // AUTHOR URL: www.cyprich.com
 // AUTHOR EMAIL: jcyprich@live.com
@@ -199,7 +199,7 @@ function FormatPhone (tel, style)
       break;
       
     case 1 :
-      return "NaN";
+      return "*** ERROR ***";
       break;
   }
 }
