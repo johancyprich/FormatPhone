@@ -2,7 +2,6 @@
 // VERSION: 1.2.0
 // DATE: May 15, 2015
 // AUTHOR: Johan Cyprich
-// AUTHOR URL: www.cyprich.com
 // AUTHOR EMAIL: jcyprich@live.com
 // 
 // LICENSE:
